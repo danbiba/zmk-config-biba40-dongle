@@ -1,5 +1,6 @@
 # Biba40
-## The BIBA40 is a compact, split, wireless keyboard powered by ZMK firmware and two microcontrollers.
+## The BIBA40 is a compact, split, wireless keyboard powered by ZMK firmware and two microcontrollers. This repository is a dongle-focused variant of zmk-config-biba40.
+It is intended for use with a USB ZMK dongle on a work PC.
 
 ![image16](images/PXL_20250408_155905966.jpg)
 ![image0](images/grey_and_purple_keycaps2.jpg)
