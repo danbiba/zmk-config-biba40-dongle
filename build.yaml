@@ -24,15 +24,16 @@ include:
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
 
-  # Left half: enable ZMK Studio
+  # Left half: peripheral when using dongle
   - board: nice_nano
     shield: biba40_left
     snippet: studio-rpc-usb-uart
-    cmake-args: -DCONFIG_ZMK_STUDIO=y
+    cmake-args: -DCONFIG_ZMK_STUDIO=y -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n
 
-  # Right half: standard build (no Studio)
+  # Right half: peripheral when using dongle
   - board: nice_nano
     shield: biba40_right
+    cmake-args: -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n
 
   # Optional: settings reset image
   - board: nice_nano
