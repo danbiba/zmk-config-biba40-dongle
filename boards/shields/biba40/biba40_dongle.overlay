@@ -65,11 +65,21 @@
     status = "okay";
 
     oled: ssd1306@3c {
-        compatible = "solomon,ssd1306fb-i2c";
+        compatible = "zephyr,ssd1306";
         reg = <0x3c>;
+
+        /* 0.91" modules are commonly 128x32 */
         width = <128>;
         height = <32>;
+
+        /* SSD1306 defaults are usually fine, but these help on some modules */
+        segment-offset = <0>;
+        page-offset = <0>;
+        display-offset = <0>;
+        multiplex-ratio = <31>;
+        prechargep = <0x22>;
+        com-invdir;
+        com-sequential;
     };
 };
-
 
