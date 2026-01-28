@@ -16,7 +16,7 @@
         events = <0>;
     };
 
-    /* Matrix transform (copied from your biba40.dtsi, but self-contained for dongle build) */
+    /* Matrix transform (self-contained for dongle build) */
     default_transform: keymap_transform_0 {
         compatible = "zmk,matrix-transform";
         columns = <12>;
@@ -67,10 +67,12 @@
     oled: ssd1306@3c {
         compatible = "solomon,ssd1306fb";
         reg = <0x3c>;
+
+        /* Common small OLED size */
         width = <128>;
         height = <32>;
 
-        /* SSD1306 defaults are usually fine, but these help on some modules */
+        /* Optional SSD1306 tuning (kept inside the node) */
         segment-offset = <0>;
         page-offset = <0>;
         display-offset = <0>;
