@@ -70,7 +70,7 @@
 
         /* 0.91" modules are commonly 128x32 */
         width = <128>;
-        height = <32>;
+        height = <30>;
 
         /* SSD1306 defaults are usually fine, but these help on some modules */
         segment-offset = <0>;
