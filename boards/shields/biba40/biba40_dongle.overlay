@@ -5,7 +5,9 @@
     chosen {
         zmk,kscan = &mock_kscan;
         zmk,physical_layout = &biba40_layout;
+        zephyr,display = &oled;
     };
+
 
     /* Dongle has no keys */
     mock_kscan: mock_kscan_0 {
@@ -69,4 +71,5 @@
         height = <32>;
     };
 };
+
 
