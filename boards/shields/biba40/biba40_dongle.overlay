@@ -1,6 +1,13 @@
+/*
+ * biba40_dongle.overlay
+ * OLED on I2C0 using SuperMini NRF52840 pins:
+ *   SDA = P0.06
+ *   SCL = P0.08
+ */
+
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <physical_layouts.dtsi>
-#include <zephyr/dt-bindings/pinctrl/nrf-pinctrl.h>
+#include <dt-bindings/nordic/nrf-pinctrl.h>
 
 / {
     chosen {
@@ -62,7 +69,7 @@
     };
 };
 
-/* Force I2C0 onto P0.06 (SDA) and P0.08 (SCL) */
+/* Force I2C0 to use SDA=P0.06 and SCL=P0.08 (SuperMini labels D1 and D0) */
 &pinctrl {
     i2c0_default: i2c0_default {
         group1 {
@@ -82,15 +89,15 @@
 
 &i2c0 {
     status = "okay";
-    compatible = "nordic,nrf-twim";
     pinctrl-0 = <&i2c0_default>;
     pinctrl-1 = <&i2c0_sleep>;
     pinctrl-names = "default", "sleep";
 
-    oled: ssd1306@3c {
+    oled: oled@3c {
         compatible = "solomon,ssd1306fb";
         reg = <0x3c>;
 
+        /* Common small OLED size */
         width = <128>;
         height = <32>;
 
