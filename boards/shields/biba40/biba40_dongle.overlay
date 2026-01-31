@@ -1,10 +1,6 @@
-/*
- * biba40_dongle.overlay
- * OLED on I2C0 (uses whatever pins i2c0 is already mapped to by the board/SoC)
- */
-
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <physical_layouts.dtsi>
+#include <zephyr/dt-bindings/pinctrl/nrf-pinctrl.h>
 
 / {
     chosen {
@@ -66,14 +62,38 @@
     };
 };
 
-&i2c1 {
+/* Provide required pinctrl states for Zephyr 4.1+ */
+&pinctrl {
+    i2c0_default: i2c0_default {
+        group1 {
+            /* Your wiring: SDA=P0.06 (D1), SCL=P0.08 (D0) */
+            psels = <NRF_PSEL(TWIM_SDA, 0, 6)>, <NRF_PSEL(TWIM_SCL, 0, 8)>;
+            bias-pull-up;
+        };
+    };
+
+    i2c0_sleep: i2c0_sleep {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 6)>, <NRF_PSEL(TWIM_SCL, 0, 8)>;
+            low-power-enable;
+            bias-pull-up;
+        };
+    };
+};
+
+&i2c0 {
     status = "okay";
+    pinctrl-0 = <&i2c0_default>;
+    pinctrl-1 = <&i2c0_sleep>;
+    pinctrl-names = "default", "sleep";
 
     oled: oled@3c {
         compatible = "solomon,ssd1306fb";
         reg = <0x3c>;
+
         width = <128>;
         height = <32>;
+
         segment-offset = <0>;
         page-offset = <0>;
         display-offset = <0>;
@@ -83,4 +103,3 @@
         com-sequential;
     };
 };
-
